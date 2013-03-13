@@ -1,0 +1,38 @@
+<h1 id="webserver-file-permissions-for-development-environments">Webserver file permissions for development environments</h1>
+<p>Some commands to realign the file permissions for linux-based Magento development environments.</p>
+<p>Steps for a Magento installation on Ubuntu Linux: 1. Creaate a runtime user group 2. Addd all developers and the apache user to this group 3. Make the apache user the owner of the website 4. Assign the group ownership of the website to the new runtime user group 5. Set appropiate permissions 6. Make sure the group ownership is inherited for newly created files and folders</p>
+<p>Example code:</p>
+<pre><code># Create a runtime user group
+sudo addgroup &quot;magento-runtime&quot;
+
+# Assign user to the new runtime user group
+sudo adduser developer1 magento-runtime
+sudo adduser www-data magento-runtime
+
+# Assign the ownership of all files and directories to the apache user &quot;www-data&quot;
+sudo chown www-data -R /var/www/vhosts/magento-admin-dev.example.com
+
+# Assign the group ownership to the &quot;magento-runtime&quot; group
+sudo chgrp magento-runtime -R /var/www/vhosts/magento-admin-dev.example.com
+
+# Assign permissions on all directories (Owner: full access, Group: full access, Others: read and execute)
+sudo find /var/www/vhosts/magento-admin-dev.example.com -type d -exec chmod 775 {} \;
+
+# Assign permissions on all files (Owner: read and write, Group: read and write, Others: read)
+sudo find /var/www/vhosts/magento-admin-dev.example -type f -exec chmod 664 {} \;
+
+# Set the stick-bit to inherit the group ownership to new files and folders
+sudo chmod g+s /var/www/vhosts/example</code></pre>
+<p>Moving the sample code into a shell script [file-link:set-webserver-group-permissions.sh.txt]:</p>
+<p>[file-preview:set-webserver-group-permissions.sh.txt]</p>
+<h2 id="links">Links</h2>
+<ul>
+<li>[link:Linux-Automatic-Group-Ownership-with-the-Sticky-Bit]</li>
+<li><a href="http://www.analysisandsolutions.com/code/chmod.htm">chmod Tutorial</a></li>
+<li><a href="http://www.tuxfiles.org/linuxhelp/fileowner.html">tuxfiles: How to change a file's owner and group in Linux</a></li>
+<li><a href="http://www.yolinux.com/TUTORIALS/LinuxTutorialManagingGroups.html">YoLinux.com: Managing Group Access</a></li>
+<li><a href="http://www.magentocommerce.com/wiki/1_-_installation_and_configuration/magento_filesystem_permissions">Magento: Magento Filesystem Permissions</a></li>
+<li><a href="http://www.linuxquestions.org/questions/linux-newbie-8/dir-and-group-ownership-automatic-set-649039/">LinuxQuestions.org: dir and group ownership automatic set</a></li>
+</ul>
+<hr />
+<p>language: en date: 2013-01-08 tags: Linux, Tipps &amp; Tricks, Filesystem Permissions, Magento, Development</p>

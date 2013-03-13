@@ -1,0 +1,17 @@
+<h1 id="automatically-assign-group-ownership-to-new-files-and-folders-using-the-sticky-bit">Automatically assign group ownership to new files and folders using the sticky bit</h1>
+<p>A simple chmod flag to enable inheritance of group ownership setings for files and folders on linux systems.</p>
+<p>Shell command:</p>
+<!-- language: lang-sh -->
+
+<pre><code># Add a sticky flag to a directory
+chmod g+s /name/of/directory</code></pre>
+<p>Be sure not to apply this flag to files and don't use the recursive (-R) flag.</p>
+<h2 id="links-related-to-the-linux-stick-bit">Links related to the linux stick bit</h2>
+<ul>
+<li>[link:Linux-Web-Server-Development-Environment-File-Permissions]</li>
+<li><a href="http://www.linuxquestions.org/questions/linux-newbie-8/dir-and-group-ownership-automatic-set-649039/">LinuxQuestions.org: dir and group ownership automatic set</a></li>
+<li><a href="http://computernetworkingnotes.com/managing-file-system-security/sticky-bit.html">ComputerNetworkingNotes.com: Linux chmod commands sticky bit example and implementations</a></li>
+<li><a href="http://www.yolinux.com/TUTORIALS/LinuxTutorialManagingGroups.html">YoLinux.com: Managing Group Access</a></li>
+</ul>
+<hr />
+<p>language: en date: 2013-01-08 tags: Linux, Tipps &amp; Tricks, Filesystem Permissions</p>

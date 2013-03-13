@@ -1,0 +1,57 @@
+<h1 id="debugging-magento">Debugging Magento</h1>
+<p>Configuration tweaks to debug your Magento development environment.</p>
+<h2 id="enable-exception-reporting">Enable Exception Reporting</h2>
+<p>Magento does not display exceptions by default. To enable exception printing in Magento you only have rename the file &quot;errors/local.xml.sample&quot; file in your Magento folder to &quot;errors/local.xml&quot;.</p>
+<!-- language: lang-sh -->
+
+<pre><code>cd /&lt;Magento-htdocs-folder&gt;/errors
+mv local.xml.sample local.xml</code></pre>
+<div class="figure">
+<img src="files/Screenshot-Enabling-Exception-Reporting-in-Magento-Error-Folder-Local-Xml.png" alt="Screenshot of the local.xml and local.xml.sample file in Magentos errors folder" /><p class="caption">Screenshot of the local.xml and local.xml.sample file in Magentos errors folder</p>
+</div>
+<p>Links:</p>
+<ul>
+<li><a href="http://ekmitchell.com/2010/11/16/enabling-exception-reporting-in-magento/">Eric Mitchell: Enabling Exception Reporting in Magento</a></li>
+</ul>
+<h2 id="enable-logging">Enable Logging</h2>
+<p>Goto <code>&quot;Magento Admin Panel&quot; &gt; System &gt; Configuration &gt; Advanced &gt; Log Settings</code> and set the log setting &quot;Enabled&quot; to &quot;Yes&quot;.</p>
+<div class="figure">
+<img src="files/Screenshot-Enable-Logging-in-Magento-Admin-Panel-Configuration.png" alt="Screenshot of the Mangeto Log Settings in the Admin Panel" /><p class="caption">Screenshot of the Mangeto Log Settings in the Admin Panel</p>
+</div>
+<p>Once you have enabled logging you will find an exception and a system log in your <code>&lt;Magento-htdocs-folder&gt;/var/log</code> folder.</p>
+<!-- language: lang-sh -->
+
+<pre><code>tail -f &lt;Magento-htdocs-folder&gt;/var/log/system.log</code></pre>
+<div class="figure">
+<img src="files/Screenshot-Magento-system-log.png" alt="Screenshot of the Magento system.log" /><p class="caption">Screenshot of the Magento system.log</p>
+</div>
+<h2 id="set-the-php-error-reporting-level-and-make-sure-errors-are-displayed">Set the PHP Error Reporting Level and make sure errors are displayed</h2>
+<p>Make sure your <a href="http://php.net/manual/de/function.error-reporting.php">PHP error reporting level</a> is set to <code>E_ALL</code> in your index.php - this will make sure no errors are swollowed by the system.</p>
+<!-- langauge: lang-php -->
+
+<pre><code>error_reporting(E_ALL);</code></pre>
+<div class="figure">
+<img src="files/Screenshot-PHP-error-reporting-level-in-Magentos-index-php.png" alt="Screenshot of the error_reporting command in Magento&#39;s index.php" /><p class="caption">Screenshot of the error_reporting command in Magento's index.php</p>
+</div>
+<p>And also that the PHP's <code>display_errors</code> flag is set to true:</p>
+<!-- langauge: lang-php -->
+
+<pre><code>ini_set(&#39;display_errors&#39;, 1);</code></pre>
+<div class="figure">
+<img src="files/Screenshot-PHP-display_errors-flag-in-Magentos-index-php.png" alt="Screenshot of the display_errors command in Magento&#39;s index.php" /><p class="caption">Screenshot of the display_errors command in Magento's index.php</p>
+</div>
+<h2 id="enable-magentos-developer-mode">Enable Magentos Developer Mode</h2>
+<p>When you turn on Magento's <a href="http://alanstorm.com/magento_exception_handling_developer_mode">developer mode</a> you will get more detailed error messages and stack traces.</p>
+<p>Enable Developer Mode in your .htaccess</p>
+<pre><code>SetEnv MAGE_IS_DEVELOPER_MODE &quot;true&quot;</code></pre>
+<div class="figure">
+<img src="files/Screenshot-Enable-Magento-Developer-Mode-in-htaccess-file.png" alt="Screenshot of an .htaccess file in which the Magento Developer mode is enabled" /><p class="caption">Screenshot of an .htaccess file in which the Magento Developer mode is enabled</p>
+</div>
+<p><strong>Links</strong></p>
+<ul>
+<li><a href="http://alanstorm.com/magento_exception_handling_developer_mode">Alan Storm - PHP Error Handling and Magento Developer Mode</a></li>
+<li><a href="http://alanstorm.com/magento_log_and_developer_mode">Alan Storm - Magento Development Environment</a></li>
+<li><a href="http://www.blog.magepsycho.com/configuring-magento-for-development-debug-mode/">Configuring Magento for Development / Debug Mode</a></li>
+</ul>
+<hr />
+<p>language: en date: 2013-02-07 tags: Magento, Debugging</p>

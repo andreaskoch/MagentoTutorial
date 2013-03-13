@@ -1,0 +1,100 @@
+<h1 id="code-analysis-and-formatting-tools-for-php-and-magento">Code Analysis and Formatting Tools for PHP and Magento</h1>
+<p>Code analysis and formatting tools for PHP and Magento: PHP CodeSniffer, PHP Mess Detector and PHP Copy Paste Detector in</p>
+<h2 id="php-codesniffer">PHP CodeSniffer</h2>
+<p>PHP CodeSniffer tokenises PHP, JavaScript and CSS files and detects violations of a defined set of coding standards.</p>
+<p>http://pear.php.net/package/PHP_CodeSniffer/</p>
+<p><strong>Installing PHP CodeSniffer</strong></p>
+<p>Use &quot;pear&quot; to install php_codesniffer:</p>
+<!-- language: lang-sh -->
+
+<pre><code>sudo pear install php_codesniffer</code></pre>
+<div class="figure">
+<img src="files/php-codesniffer/Screenshot-Install-PHP-CodeSniffer-with-pear.png" alt="Screenshot of the php_codesniffer installation with pear" /><p class="caption">Screenshot of the php_codesniffer installation with pear</p>
+</div>
+<p>After PHP CodeSniffer has been installed you have to install the rules. For example for Magento you can install <a href="https://github.com/madedotcom/phpcs-magento-rules">Made.com PHPCS Magento Rules</a>:</p>
+<p>Get the CodeSniffer installation directory: <!-- language: lang-sh --></p>
+<pre><code>pear list-files PHP_CodeSniffer</code></pre>
+<div class="figure">
+<img src="files/php-codesniffer/Screenshot-get-PHP-CodeSniffer-installation-folder-with-pear-list-files.png" alt="Result of pear list-files for PHP_CodeSniffer" /><p class="caption">Result of pear list-files for PHP_CodeSniffer</p>
+</div>
+<p>In my case the the installation folder of PHP-CodeSniffer is:</p>
+<pre><code>/usr/share/php/PHP/CodeSniffer</code></pre>
+<p>Once you know the installation folder you can clone &quot;phpcs-magento-rules&quot; from github into the &quot;Standards/Made&quot; folder of your CodeSniffer installation:</p>
+<!-- language: lang-sh -->
+
+<pre><code>sudo git clone https://github.com/madedotcom/phpcs-magento-rules /usr/share/php/PHP/CodeSniffer/Standards/Made</code></pre>
+<div class="figure">
+<img src="files/php-codesniffer/Screenshot-Cloning-phpcs-magento-rules-from-github-to-the-CodeSniffer-installation-folder.png" alt="Cloning Made into your CodeSniffer folder" /><p class="caption">Cloning Made into your CodeSniffer folder</p>
+</div>
+<p>You can check if your installation was successfull with the &quot;phpcs -i&quot; command. If the command lists &quot;Made&quot; your installation was successful:</p>
+<!-- language: lang-sh -->
+
+<pre><code>phpcs -i</code></pre>
+<div class="figure">
+<img src="files/php-codesniffer/Screenshot-Checking-the-CodeSniffer-Made-Installation.png" alt="Checking the Made installation with phpcs -i" /><p class="caption">Checking the Made installation with phpcs -i</p>
+</div>
+<p><strong>Integrating PHP-CodeSniffer with Netbeans</strong></p>
+<p>Integrate PHP-CodeSniffer with Netbeans IDE using <a href="http://blog.florianwolters.de/tutorial/2012/05/03/Integrate-tools-for-static-PHP-code-analyses-into-NetBeans-7.x/">Florian Wolter's phpcsmd plugin for Netbeans</a>:</p>
+<ol style="list-style-type: decimal">
+<li>Goto Tools → Plugins → Available Plugins</li>
+<li>Type in &quot;phpcsmd&quot;</li>
+<li>Check &quot;install&quot; for the plugin with the name &quot;phpcsmd&quot; from Normal Specht</li>
+<li>Click &quot;install&quot;</li>
+</ol>
+<div class="figure">
+<img src="files/php-codesniffer/Screenshot-Integrate-PHP-CodeSniffer-with-Netbeans-using-the-phpcsmd-plugin.png" alt="Integrating PHP-CodeSniffer with Netbeans IDE" /><p class="caption">Integrating PHP-CodeSniffer with Netbeans IDE</p>
+</div>
+<p>After you have installed the &quot;phpcsmd&quot; plugin you can display an &quot;Action Items&quot; window:</p>
+<p>Menu → Window → Action Items</p>
+<div class="figure">
+<img src="files/php-codesniffer/Screenshot-PHP-CodeSniffer-Netbeans-Action-Items-Window.png" alt="Integrating PHP-CodeSniffer with Netbeans IDE" /><p class="caption">Integrating PHP-CodeSniffer with Netbeans IDE</p>
+</div>
+<h2 id="php-mess-detector">PHP Mess Detector</h2>
+<p>It is a spin-off project of PHP Depend and aims to be a PHP equivalent of the well known Java tool PMD. PHPMD can be seen as an user friendly and easy to configure frontend for the raw metrics measured by PHP Depend.</p>
+<p><strong>Installing PHP Mess Detector</strong></p>
+<p>Use &quot;pear&quot; to install [(]PHP MD - PHP Mess Detector](http://phpmd.org/):</p>
+<!-- language: lang-sh -->
+
+<pre><code>sudo pear channel-discover pear.phpmd.org
+sudo pear channel-discover pear.pdepend.org
+sudo pear install --alldeps phpmd/PHP_PMD</code></pre>
+<p>Now you have to download the [Magento ruleset)(https://github.com/cobhimself/phpmd-magento-ruleset) for PHP Mess Detector to your rulesets folder &quot;/usr/share/php/data/PHP_PMD/resources/rulesets&quot;.</p>
+<!-- language: lang-sh -->
+
+<pre><code>sudo curl -s -o /usr/share/php/data/PHP_PMD/resources/rulesets/magento-ruleset.xml https://raw.github.com/cobhimself/phpmd-magento-ruleset/master/magento-ruleset.xml</code></pre>
+<div class="figure">
+<img src="files/php-mess-detector/Screenshot-Download-PHP-Messdetector-Magento-Ruleset.png" alt="Downloading the a Magento ruleset for PHP Mess Detector from github using curl" /><p class="caption">Downloading the a Magento ruleset for PHP Mess Detector from github using curl</p>
+</div>
+<h2 id="php-copy-paste-detector-phpcpd">PHP Copy Paste Detector (PHPCPD)</h2>
+<p>A Copy/Paste Detector (CPD) for PHP code: https://github.com/sebastianbergmann/phpcpd</p>
+<p><strong>Installing PHP Copy/Paste Detector</strong></p>
+<p>You can install PHPCPD using pear:</p>
+<!-- language: lang-sh -->
+
+<pre><code>sudo pear config-set auto_discover 1
+sudo pear install pear.phpunit.de/phpcpd</code></pre>
+<div class="figure">
+<img src="files/php-copy-paste-detector/Screenshot-Installation-PHP-Copy-Paste-Detector-with-pear.png" alt="Installing PHPCPD with pear" /><p class="caption">Installing PHPCPD with pear</p>
+</div>
+<h2 id="netbeans-configuration">Netbeans Configuration</h2>
+<p>After you have installed PHP CodeSniffer (PHPCS), PHP Mess Detector (PHPMD) and PHP Copy/Paste Detector (PHPCPD) you should check your Netbeans configuration under</p>
+<p>Menu → Tools → Options → PHPCSMD</p>
+<p><strong>PHP CodeSniffer (PHPCS)</strong></p>
+<div class="figure">
+<img src="files/netbeans/Screenshot-PHPCSMD-Configuration-in-Netbeans-PHP-CodeSniffer.png" alt="Netbeans Configuration for PHP-CodeSniffer" /><p class="caption">Netbeans Configuration for PHP-CodeSniffer</p>
+</div>
+<p><strong>PHP Mess Detector (PHPMD)</strong></p>
+<div class="figure">
+<img src="files/netbeans/Screenshot-PHPCSMD-Configuration-in-Netbeans-PHP-Mess-Detector.png" alt="Netbeans Configuration for PHP Mess Detector" /><p class="caption">Netbeans Configuration for PHP Mess Detector</p>
+</div>
+<p><strong>PHP Copy/Paste Detector (PHPCPD)</strong></p>
+<div class="figure">
+<img src="files/netbeans/Screenshot-PHPCSMD-Configuration-in-Netbeans-PHP-Copy-Paste-Detector.png" alt="Netbeans Configuration for PHP Copy/Paste Detector" /><p class="caption">Netbeans Configuration for PHP Copy/Paste Detector</p>
+</div>
+<h2 id="code-sniffer-mess-detector-and-copy-paste-detector-in-action">Code-Sniffer, Mess-Detector and Copy-Paste Detector in Action</h2>
+<p>Using PHP-CodeSniffer, PHP-Mess-Detector and PHP-Copy-Paste-Detector in Netbeans:</p>
+<div class="figure">
+<img src="files/netbeans/Screenshot-PHP-CodeSniffer-and-Copy-Paste-Detector-and-Mess-Detector-in-Action-01.png" />
+</div>
+<hr />
+<p>date: 2013-02-26 tags: PHP, Development, Code Analysis, Netbeans language: en</p>

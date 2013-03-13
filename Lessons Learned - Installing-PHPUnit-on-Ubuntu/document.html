@@ -1,0 +1,42 @@
+<h1 id="php-unit-installation">PHP Unit Installation</h1>
+<p>Installing PHP Unit on Ubuntu</p>
+<p>PHPUnit</p>
+<!-- language: lang-sh -->
+
+<pre><code>sudo su
+pear config-set auto_discover 1
+
+pear install pear.phpunit.de/PHPUnit</code></pre>
+<p>Submodules</p>
+<!-- language: lang-sh -->
+
+<pre><code>sudo su
+pear config-set preferred_state beta
+
+pear install phpunit/DbUnit
+pear install phpunit/PHPUnit_Selenium
+pear install phpunit/PHPUnit_Story
+pear install phpunit/PHPUnit_TestListener_DBUS
+pear install phpunit/PHPUnit_TestListener_XHProf
+pear install phpunit/PHPUnit_TicketListener_Fogbugz
+pear install phpunit/PHPUnit_TicketListener_GitHub
+pear install phpunit/PHPUnit_TicketListener_GitHub
+pear install phpunit/PHPUnit_TicketListener_GoogleCode
+pear install phpunit/PHPUnit_TicketListener_Trac
+pear install phpunit/PHP_Invoker</code></pre>
+<div class="figure">
+<img src="files/Screenshot-phpunit-magento.png" alt="Screenshot of a phpunit run in the command line" /><p class="caption">Screenshot of a phpunit run in the command line</p>
+</div>
+<p><strong>General Links</strong></p>
+<ul>
+<li><a href="http://www.phpunit.de/manual/3.6/en/installation.html">PHPUnit Manual - Installing PHPUnit</a></li>
+<li><a href="https://github.com/sebastianbergmann/phpunit/">github: PHPUnit</a></li>
+</ul>
+<p><strong>Troubleshooting Links</strong></p>
+<ul>
+<li>http://www.ducea.com/2008/02/01/installing-pear-beta-packages/</li>
+<li>http://develcuy.com/en/howto-install-xhprof-ubuntu-howto-use-drupal-6x-7x</li>
+<li>http://web-dev-wiki.blogspot.de/2012/11/how-to-install-dbus-for-php-on-ubuntu.html</li>
+</ul>
+<hr />
+<p>date: 2013-03-05 langauge: en tags: PHP, Unit Testing</p>

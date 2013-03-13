@@ -1,0 +1,29 @@
+#!/bin/bash
+
+wwwfolder=/var/www/vhosts/magento-dev.arvato-hightech-ecommerce.com
+
+groupname="magento-runtime"
+developmentuser=dev
+webserveruser=www-data
+
+# Create a runtime user group
+sudo addgroup $groupname
+
+# Assign user to the new runtime user group
+sudo adduser $developmentuser $groupname
+sudo adduser $webserveruser $groupname
+
+# Assign the ownership of all files and directories to the apache user "www-data"
+sudo chown www-data -R $wwwfolder
+
+# Assign the group ownership to the "magento-runtime" group
+sudo chgrp magento-runtime -R $wwwfolder
+
+# Assign permissions on all directories (Owner: full access, Group: full access, Others: read and execute)
+sudo find $wwwfolder -type d -exec chmod 775 {} \;
+
+# Assign permissions on all files (Owner: read and write, Group: read and write, Others: read)
+sudo find $wwwfolder -type f -exec chmod 664 {} \;
+
+# Set the stick-bit to inherit the group ownership to new files and folders
+sudo chmod g+s $wwwfolder
