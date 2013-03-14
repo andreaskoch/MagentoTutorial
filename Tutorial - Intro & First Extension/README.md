@@ -209,6 +209,47 @@ Finally, we ensure the module is active. - Clear your Magento cache.
 * Expand "Disable Modules Output" (if it isn't already).
 * Ensure that Magentotutorial_Weblog shows up.
 
+### Create Action Controller(s) for our Routes
+
+Create a file at app/code/local/Magentotutorial/Weblog/controllers/IndexController.php
+
+That contains the following
+
+<!-- language: lang-php -->
+
+	class Magentotutorial_Helloworld_IndexController extends Mage_Core_Controller_Front_Action {        
+	
+	    public function testModelAction() {
+           echo 'Setup!';
+        }
+	
+	}
+	
+
+### Configuring Routes
+Next, we're going to configure a route. A route will turn a URL into an Action Controller and a method. Unlike other convention based PHP MVC systems, with Magento you need to explicitly define a route in the global Magento config.
+
+In your config.xml file, add the following section:
+
+<!-- language: lang-xml -->
+
+	<config>    
+	    ...
+	    <frontend>
+	       <routers>
+	        <weblog>
+	            <use>standard</use>
+	            <args>
+	                <module>Magentotutorial_Weblog</module>
+	                <frontName>weblog</frontName>
+	            </args>
+	        </weblog>
+	    </routers>
+	    </frontend>
+	    ...
+	</config>
+
+
 ## Bibliography
 
 
